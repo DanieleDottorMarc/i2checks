@@ -6,4 +6,3 @@ git clone https://github.com/DanieleCapponi/i2checks.git
 cd i2checks
 chmod 744 install_checks
 ./install_checks
-cd .. && rm -r i2checks/

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+/bin/su backuppc -c /usr/lib/nagios/plugins/check_backuppc

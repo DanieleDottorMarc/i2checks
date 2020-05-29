@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# wget -O - https://github.com/DanieleCapponi/i2checks/grub | bash
+
 git clone https://github.com/DanieleCapponi/i2checks.git
 cd i2checks
 chmod 744 install_checks

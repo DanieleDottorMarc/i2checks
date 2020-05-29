@@ -1,0 +1,28 @@
+#!/bin/bash
+
+
+mdadm='/proc/mdstat'
+
+
+raid_devices=$(grep ^md -c $mdadm)                       # Quantità array raid
+raid_status=$(grep "\[.*_.*\]" $mdadm -c)                # Quantità array non efficenti
+raid_recover=$(grep recovery $mdadm | awk '{print $4}')  # In caso di recovery mode, salva la percentuale
+raid_resync=$(grep resync $mdadm | awk '{print $4}')     # In caso di sincronizzazione, salva la percentuale
+
+
+if [[ $raid_recover ]]; then
+        status="WARNING - Checked $raid_devices arrays, recovering : ${raid_recover}"
+        ex_code=1
+elif [[ $raid_resync ]]; then
+        status="WARNING - Checked $raid_devices arrays, resyncing : ${raid_resync}"
+        ex_code=1
+elif [[ $raid_status == "0" ]]; then
+        status="OK - Checked $raid_devices arrays."
+        ex_code=0
+else
+        status="CRITICAL - Checked $raid_devices arrays, ${raid_status} have FAILED"
+        ex_code=2
+fi
+
+echo $status
+exit $ex_code

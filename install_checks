@@ -18,7 +18,7 @@ if [[ $(ls -l $nagios |grep backuppc |wc -l) -eq 2 && $(ls -l $nagios |grep mdad
 	echo -e "\ninstall_checks execution says:"
 	echo "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c1}$)          installed"
 	echo "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c2})  installed"
-	echo "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c3})               installed"
+	echo "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c3})             installed"
 else
         echo "$(host) :: ERROR. Check ${nagios}"
 fi

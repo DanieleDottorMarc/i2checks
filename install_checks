@@ -14,6 +14,7 @@ else
 fi
 
 if [[ $(ls -l $nagios |grep backuppc |wc -l) -eq 2 && $(ls -l $nagios |grep mdadm |wc -l) -eq 1 ]]; then
+	echo -e "\ninstall_checks execution says:"
 	echo "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c1}$)"
 	echo "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c2})"
 	echo "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c3})"

@@ -3,6 +3,7 @@
 [[ $(id -u) -ne 0 ]] && echo "You must be root" && return 0
 
 nagios='/usr/lib/nagios/plugins'
+pl='plugins'
 c1='check_backuppc'
 c2='check_backuppc_wrapper'
 c3='check_mdadm'
@@ -10,7 +11,7 @@ c3='check_mdadm'
 if [[ ! -d $nagios ]]; then
         mkdir -p $nagios &>/dev/null && echo "${nagios} created"
 else
-        cp $c1 $c2 $c3 $nagios/ && chmod 755 $nagios/$c1 $nagios/$c2 $nagios/$c3
+        cp $pl/$c1 $pl/$c2 $pl/$c3 $nagios/ && chmod 755 $nagios/$c1 $nagios/$c2 $nagios/$c3
 fi
 
 if [[ $(ls -l $nagios |grep backuppc |wc -l) -eq 2 && $(ls -l $nagios |grep mdadm |wc -l) -eq 1 ]]; then

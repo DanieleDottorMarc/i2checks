@@ -21,3 +21,5 @@ if [[ $(ls -l $nagios |grep backuppc |wc -l) -eq 2 && $(ls -l $nagios |grep mdad
 else
         echo "$(host) :: ERROR. Check ${nagios}"
 fi
+
+rm -r i2checks

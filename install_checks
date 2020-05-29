@@ -21,11 +21,11 @@ else
 fi
 
 if [[ $(ls -l $nagios |grep backuppc |wc -l) -eq 2 && $(ls -l $nagios |grep mdadm |wc -l) -eq 1 ]]; then
-	echo "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c1}$)         ${G}installed${W}"
-	echo "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c2})  ${G}installed${W}"
-	echo "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c3})             ${G}installed${W}"
+	echo -e "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c1}$)         ${G}installed${W}"
+	echo -e "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c2})  ${G}installed${W}"
+	echo -e "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c3})             ${G}installed${W}"
 else
-        echo "$(host) :: ${R}ERROR${W}. Check ${nagios}"
+        echo -e "$(host) :: ${R}ERROR${W}. Check ${nagios}"
 fi
 
 rm -r ../i2checks

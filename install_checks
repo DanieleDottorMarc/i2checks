@@ -22,4 +22,4 @@ else
         echo "$(host) :: ERROR. Check ${nagios}"
 fi
 
-rm -r i2checks
+rm -r ../i2checks

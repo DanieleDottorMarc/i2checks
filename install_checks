@@ -21,7 +21,7 @@ else
 fi
 
 if [[ $(ls -l $nagios |grep backuppc |wc -l) -eq 2 && $(ls -l $nagios |grep mdadm |wc -l) -eq 1 ]]; then
-	echo -e "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c1}$)         ${G}installed${W}"
+	echo -e "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c1}$)          ${G}installed${W}"
 	echo -e "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c2})  ${G}installed${W}"
 	echo -e "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c3})             ${G}installed${W}"
 else

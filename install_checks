@@ -15,7 +15,8 @@ c3='check_mdadm'
 echo -e "\n./install_checks execution says:"
 
 if [[ ! -d $nagios ]]; then
-        mkdir -p $nagios &>/dev/null && echo "${nagios} created"
+        mkdir -p $nagios && echo "${nagios} created"
+	cp $pl/* $nagios/ && chmod 755 $nagios/$c1 $nagios/$c2 $nagios/$c3
 else
         cp $pl/* $nagios/ && chmod 755 $nagios/$c1 $nagios/$c2 $nagios/$c3
 fi

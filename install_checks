@@ -8,25 +8,26 @@ W='\033[1;37m'
 
 nagios='/usr/lib/nagios/plugins'
 pl='plugins'
-c1='check_backuppc'
-c2='check_backuppc_wrapper'
-c3='check_mdadm'
 
-echo -e "\n./install_checks execution says:"
+checks=$(ls -1 $pl)
+
+echo -e "\nInstallig Icinga2 Modules:"
 
 if [[ ! -d $nagios ]]; then
-        mkdir -p $nagios && echo "${nagios} created"
-	cp $pl/* $nagios/ && chmod 755 $nagios/$c1 $nagios/$c2 $nagios/$c3
+        mkdir -p $nagios && echo "[+] ${nagios} created"
+        cp $pl/* $nagios/ && chmod 755 -R $nagios/
 else
-        cp $pl/* $nagios/ && chmod 755 $nagios/$c1 $nagios/$c2 $nagios/$c3
+        cp $pl/* $nagios/ && chmod 755 -R $nagios/
 fi
 
-if [[ $(ls -l $nagios |grep backuppc |wc -l) -eq 2 && $(ls -l $nagios |grep mdadm |wc -l) -eq 1 ]]; then
-	echo -e "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c1}$)          ${G}installed${W}"
-	echo -e "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c2})  ${G}installed${W}"
-	echo -e "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c3})             ${G}installed${W}"
-else
-        echo -e "${R}ERROR${W}. Check ${nagios}"
-fi
+for c in $checks; do
+        if [[ $(ls -l $nagios |grep $c |wc -l) -ne 0 ]]; then
+                echo -e "${G}[+] Installed${W}  >  ${nagios}/${c}"
+        else
+                echo -e "[-] ${c} :: ${R}ERROR${W}. Check ${nagios}"
+        fi
 
-rm -r ../i2checks
+
+done
+
+#rm -r ../i2checks

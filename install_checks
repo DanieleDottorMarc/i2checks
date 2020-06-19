@@ -11,20 +11,22 @@ pl='plugins'
 c1='check_backuppc'
 c2='check_backuppc_wrapper'
 c3='check_mdadm'
+c4='check_hostalive'
 
 echo -e "\n./install_checks execution says:"
 
 if [[ ! -d $nagios ]]; then
         mkdir -p $nagios && echo "${nagios} created"
-	cp $pl/* $nagios/ && chmod 755 $nagios/$c1 $nagios/$c2 $nagios/$c3
+	cp $pl/* $nagios/ && chmod 755 $nagios/$c1 $nagios/$c2 $nagios/$c3 $nagios/$c4
 else
-        cp $pl/* $nagios/ && chmod 755 $nagios/$c1 $nagios/$c2 $nagios/$c3
+        cp $pl/* $nagios/ && chmod 755 $nagios/$c1 $nagios/$c2 $nagios/$c3 $nagios/$c4
 fi
 
-if [[ $(ls -l $nagios |grep backuppc |wc -l) -eq 2 && $(ls -l $nagios |grep mdadm |wc -l) -eq 1 ]]; then
-	echo -e "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c1}$)          ${G}installed${W}"
-	echo -e "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c2})  ${G}installed${W}"
-	echo -e "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c3})             ${G}installed${W}"
+if [[ $(ls -l $nagios |grep backuppc |wc -l) -eq 2 && $(ls -l $nagios |grep mdadm |wc -l) -eq 1 && $(ls -l $nagios |grep hostalive |wc -l) -eq 1 ]]; then
+	echo -e "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c1})    ${G}installed${W}"
+	echo -e "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c2})  	${G}installed${W}"
+	echo -e "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c3})    ${G}installed${W}"
+	echo -e "OK  >  ${nagios}/$(ls ${nagios} |sort | grep ${c4})    ${G}installed${W}"
 else
         echo -e "${R}ERROR${W}. Check ${nagios}"
 fi
